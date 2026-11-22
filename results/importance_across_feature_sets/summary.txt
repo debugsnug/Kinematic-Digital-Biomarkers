@@ -1,0 +1,31 @@
+Top-5 base features by out-of-fold SHAP (exploratory RF, k=40) per feature set
+
+coordinate_only: path_efficiency, max_lateral_deviation_mm, trajectory_length_mm, mean_lateral_deviation_mm, peak_acceleration_mm_s2
+
+angle_enhanced: path_efficiency, max_lateral_deviation_mm, trajectory_length_mm, mean_lateral_deviation_mm, peak_velocity_mm_s
+
+coordinate_no_position_error: path_efficiency, max_lateral_deviation_mm, trajectory_length_mm, mean_lateral_deviation_mm, peak_velocity_mm_s
+
+coordinate_no_duration: path_efficiency, mean_lateral_deviation_mm, max_lateral_deviation_mm, trajectory_length_mm, peak_velocity_mm_s
+
+coordinate_no_duration_no_position_error: path_efficiency, max_lateral_deviation_mm, trajectory_length_mm, mean_lateral_deviation_mm, peak_velocity_mm_s
+
+coordinate_no_timing_coupled: path_efficiency, max_lateral_deviation_mm, trajectory_length_mm, mean_lateral_deviation_mm, peak_velocity_mm_s
+
+Rank agreement between sets:
+                                   set_a                                    set_b  n_common_features  spearman  top5_overlap
+                         coordinate_only                           angle_enhanced                 14     0.978             4
+                         coordinate_only             coordinate_no_position_error                 13     0.995             4
+                         coordinate_only                   coordinate_no_duration                 13     0.967             4
+                         coordinate_only coordinate_no_duration_no_position_error                 12     0.986             4
+                         coordinate_only             coordinate_no_timing_coupled                 11     0.991             4
+                          angle_enhanced             coordinate_no_position_error                 13     0.984             5
+                          angle_enhanced                   coordinate_no_duration                 13     0.962             5
+                          angle_enhanced coordinate_no_duration_no_position_error                 12     0.972             5
+                          angle_enhanced             coordinate_no_timing_coupled                 11     0.982             5
+            coordinate_no_position_error                   coordinate_no_duration                 12     0.972             5
+            coordinate_no_position_error coordinate_no_duration_no_position_error                 12     0.993             5
+            coordinate_no_position_error             coordinate_no_timing_coupled                 10     1.000             5
+                  coordinate_no_duration coordinate_no_duration_no_position_error                 12     0.979             5
+                  coordinate_no_duration             coordinate_no_timing_coupled                 11     0.964             5
+coordinate_no_duration_no_position_error             coordinate_no_timing_coupled                 10     1.000             5

@@ -1,0 +1,13 @@
+winner,times_selected
+AdaBoost,9
+Linear_SVM,9
+KNN,5
+Gaussian_NB,5
+Random_Forest,5
+Extra_Trees,4
+Gradient_Boosting,4
+Decision_Tree,3
+MLP,3
+LDA,1
+Logistic_L2,1
+Logistic_L1,1

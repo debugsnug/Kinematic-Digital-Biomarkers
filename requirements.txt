@@ -1,0 +1,16 @@
+# Pinned dependencies (verified: full pipeline executed with exactly these versions)
+# Python runtime: CPython 3.13.x (verified run: 3.13.18; see .python-version).
+# Install with: python -m pip install -r requirements.txt
+# Keep these pins fixed for exact splitter and model reproducibility.
+# Project: Explainable Kinematic Digital Biomarkers for Upper-Limb Assessment in DCP
+# Course : 23CSE365 Internet of Things - Amrita Vishwa Vidyapeetham
+numpy==2.3.5
+pandas==2.2.3
+scipy==1.17.1
+scikit-learn==1.6.1
+xgboost==3.0.4
+shap==0.49.1
+matplotlib==3.10.1
+openpyxl==3.1.5
+joblib==1.4.2
+lime==0.2.0.1

@@ -1,0 +1,41 @@
+{
+    "dataset": "experiment_dataset_coord_no_timing_coupled.csv",
+    "n_predictors": 66,
+    "cv_seed": 48,
+    "selection_criterion": "inner_accuracy_mean on training folds only (no outer test score used in ranking; ties by model name). Ranking pools inner-CV over all outer folds, so the top-3's outer-fold results are optimistic - see results/nested_selection for the selection-unbiased estimate.",
+    "n_selected": 3,
+    "selected_models": [
+        "Extra_Trees",
+        "Random_Forest",
+        "MLP"
+    ],
+    "details": [
+        {
+            "rank": 1,
+            "model": "Extra_Trees",
+            "inner_accuracy_mean": 0.9459090909090909,
+            "inner_accuracy_std": 0.033223821484735745,
+            "test_accuracy_mean": 0.9200000000000002,
+            "test_accuracy_std": 0.08366600265340754,
+            "test_roc_auc_mean": 0.9708333333333332
+        },
+        {
+            "rank": 2,
+            "model": "Random_Forest",
+            "inner_accuracy_mean": 0.9459090909090909,
+            "inner_accuracy_std": 0.03322382148473576,
+            "test_accuracy_mean": 0.9218181818181819,
+            "test_accuracy_std": 0.043881885040535154,
+            "test_roc_auc_mean": 0.9791666666666667
+        },
+        {
+            "rank": 3,
+            "model": "MLP",
+            "inner_accuracy_mean": 0.9418181818181818,
+            "inner_accuracy_std": 0.022186754294301437,
+            "test_accuracy_mean": 0.9218181818181819,
+            "test_accuracy_std": 0.0832203090279695,
+            "test_roc_auc_mean": 0.9875
+        }
+    ]
+}

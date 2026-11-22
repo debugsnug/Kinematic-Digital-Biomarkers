@@ -1,0 +1,6 @@
+fold,n_train_subjects,n_test_subjects,n_selected_features,inner_best_f1,best_params
+1,41,10,20,0.8999999999999999,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 20}"
+2,41,10,40,0.9272727272727272,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 40}"
+3,41,10,40,0.8772727272727272,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 40}"
+4,41,10,40,0.9318181818181819,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 40}"
+5,40,11,20,0.95,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 20}"

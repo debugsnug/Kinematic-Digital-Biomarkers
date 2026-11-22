@@ -1,0 +1,12 @@
+winner,times_selected
+Gaussian_NB,12
+Extra_Trees,10
+Linear_SVM,9
+AdaBoost,4
+Decision_Tree,3
+Random_Forest,3
+Gradient_Boosting,2
+MLP,2
+HistGradientBoosting,2
+RBF_SVM,2
+KNN,1

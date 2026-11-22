@@ -1,0 +1,6 @@
+fold,model,inner_accuracy,best_parameters,accuracy,balanced_accuracy,f1,roc_auc
+1,Gaussian_NB,0.975,"{'k': 20, 'var_smoothing': 1e-09}",1.0,1.0,1.0,1.0
+2,HistGradientBoosting,0.95,"{'k': 40, 'learning_rate': 0.05, 'max_iter': 100, 'min_samples_leaf': 5}",0.9,0.875,0.9230769230769232,1.0
+3,Gaussian_NB,0.925,"{'k': 20, 'var_smoothing': 0.1}",0.8,0.8,0.8,0.96
+4,Linear_SVM,0.9772727272727272,"{'k': 20, 'C': 1.0}",0.7,0.6904761904761905,0.7692307692307693,0.9047619047619048
+5,Extra_Trees,0.9522727272727272,"{'k': 20, 'max_depth': None, 'min_samples_leaf': 1}",0.9,0.9166666666666669,0.9090909090909092,0.9583333333333334

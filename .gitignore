@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Environments and dependencies
+.venv/
+venv/
+node_modules/
+
+# Logs and temporary files
+logs/
+*.log
+reach-session*.json
+
+# Dataset: download separately from official DOI
+data/raw/
+
+# Large intermediate files
+data/processed/*.pkl
+
+# Internal review material
+docs/archive_teammate_review/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db

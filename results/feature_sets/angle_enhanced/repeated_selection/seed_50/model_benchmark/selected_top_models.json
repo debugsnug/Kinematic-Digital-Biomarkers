@@ -1,0 +1,41 @@
+{
+    "dataset": "experiment_dataset_angle_enhanced.csv",
+    "n_predictors": 168,
+    "cv_seed": 50,
+    "selection_criterion": "inner_accuracy_mean on training folds only (no outer test score used in ranking; ties by model name). Ranking pools inner-CV over all outer folds, so the top-3's outer-fold results are optimistic - see results/nested_selection for the selection-unbiased estimate.",
+    "n_selected": 3,
+    "selected_models": [
+        "Linear_SVM",
+        "RBF_SVM",
+        "Logistic_L2"
+    ],
+    "details": [
+        {
+            "rank": 1,
+            "model": "Linear_SVM",
+            "inner_accuracy_mean": 0.9268181818181818,
+            "inner_accuracy_std": 0.038111406938644704,
+            "test_accuracy_mean": 0.8854545454545454,
+            "test_accuracy_std": 0.12121969673296933,
+            "test_roc_auc_mean": 0.9281746031746032
+        },
+        {
+            "rank": 2,
+            "model": "RBF_SVM",
+            "inner_accuracy_mean": 0.9268181818181818,
+            "inner_accuracy_std": 0.03016826092008205,
+            "test_accuracy_mean": 0.8654545454545455,
+            "test_accuracy_std": 0.12636036621013855,
+            "test_roc_auc_mean": 0.89484126984127
+        },
+        {
+            "rank": 3,
+            "model": "Logistic_L2",
+            "inner_accuracy_mean": 0.9118181818181817,
+            "inner_accuracy_std": 0.03732396699704756,
+            "test_accuracy_mean": 0.8854545454545454,
+            "test_accuracy_std": 0.12121969673296933,
+            "test_roc_auc_mean": 0.9297619047619048
+        }
+    ]
+}

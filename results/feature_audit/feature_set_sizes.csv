@@ -1,0 +1,7 @@
+feature_set,description,n_predictors
+coordinate_only,PRIMARY: key-point coordinates + target object; no angle-derived feature,84
+angle_enhanced,SECONDARY: coordinate_only + 2D-video-derived joint-angle features,168
+coordinate_no_position_error,ABLATION: coordinate_only without position_error_* (target-object dependent),78
+coordinate_no_duration,ABLATION: coordinate_only without movement_duration_s_* (equals recording clip length),78
+coordinate_no_duration_no_position_error,ABLATION: coordinate_only without duration and position_error,72
+coordinate_no_timing_coupled,"ABLATION (strictest): coordinate_only without duration, normalised jerk and SPARC",66

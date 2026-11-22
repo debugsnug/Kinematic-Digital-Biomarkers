@@ -1,0 +1,34 @@
+check,status,details
+Experiment dataset exists,PASS,"Shape = (51, 88)"
+Required subject and target columns,PASS,Both subject and target are present.
+Unique subject count,PASS,51 unique subjects found.
+One row per subject,PASS,No subject occurs more than once.
+Target distribution,PASS,TD=21 and DCP=30.
+Predictor count,PASS,84 predictor variables found.
+Predictor data type,PASS,All selected predictors are numeric.
+Completely missing predictors,PASS,No predictor is completely missing.
+Partially missing predictors,INFO,6 predictors contain some missing values.
+Duplicate complete rows,PASS,No duplicate complete rows.
+Model benchmark subject uniqueness,PASS,Each model has at most one prediction per subject.
+Model benchmark subject coverage,PASS,Every benchmark model has predictions for all 51 subjects.
+Outer-fold subject isolation,PASS,Each subject is assigned to one outer test fold per model.
+Top-3 outer-fold subject isolation,PASS,Each subject appears in one outer fold per model.
+Ablation outer-fold coverage,PASS,Each representation has five outer folds.
+Stable feature set,INFO,9 features identified as stable.
+Leak-free model selection,PASS,"Top models ['MLP', 'Extra_Trees', 'RBF_SVM'] were ranked by inner-CV accuracy only; no outer-fold test score entered the ranking. Scope: this rules out direct test-set use, NOT selection bias - see the LIMITATION entry below."
+Globally selected top-3 results are optimistic,LIMITATION,"The top-3 list pools inner-CV results over ALL outer folds, so each outer test subject sat in the training data of the other folds that produced the ranking. Outer-fold results of these 3 families (about 0.90 accuracy) are therefore optimistic validation numbers, NOT independent final-test performance. The unbiased estimate of the whole selection process is the fully nested one (results/nested_selection, headline)."
+Fully nested selection estimate,PASS,"Each subject predicted exactly once, and the winner in every fold is re-derived here as the family with the highest INNER-CV accuracy in that fold (no outer-test score used)."
+Label-permutation sanity check,PASS,"1000 permutations, null mean 0.480, p<=0.0010 (1/1001 floor; fixed RF, not the full selection procedure). Sanity check only; cannot exclude site/session confounding."
+Functional Resilience Index (output presence only),INFO,"Output present. Label-free, subject-intrinsic by construction (code review; not machine-verified here). Proposed/exploratory index."
+LIME explanations (output presence only),INFO,Output present (OOF LIME by construction in step 31; not machine-verified here).
+Coordinate-only primary feature set,PASS,"Predictor counts {'coordinate_only': 84, 'angle_enhanced': 168, 'coordinate_no_position_error': 78, 'coordinate_no_duration': 78, 'coordinate_no_duration_no_position_error': 72, 'coordinate_no_timing_coupled': 66}; modality registry verified empirically (angle/object columns perturbed in 408 recordings, step 32); no angle-derived predictor in the primary set."
+Benchmark vs independent Pipeline re-run,PASS,80/80 model-fold predictions and best parameters identical between the pre-fitted-transform benchmark and the real Pipeline+GridSearchCV path.
+Identical outer folds across feature sets,PASS,Saved outer-fold assignments compared directly: identical for all 6 feature sets.
+"Outer-split integrity (all seeds, all primary assignments)",PASS,11 saved outer assignments (seed 42 + repeated seeds): each subject in exactly one of 5 test folds. Inner-split overlap is asserted inside step 23 at run time (not re-derivable from saved files).
+Reach Lab demo matches final results,PASS,demo/study.json was built from the current rep_features.csv (hash match) and its per-participant headline calls equal results/nested_selection predictions for all 51 participants.
+LightGBM / CatBoost,INFO,Not implemented. The benchmark has 16 models (the stated 15-16 range); LightGBM/CatBoost were considered and left out; adding them would give 18 models and needs the guide's approval.
+Recording-site / acquisition confounding,LIMITATION,"No site/session/camera variable exists in the supplied data (a per-site claim in earlier drafts could not be verified and was removed); subject-number blocks are structured by group, and file/subject numbering alone separates the groups (ID-only baseline in label_permutation_test.csv). A model could partly exploit acquisition differences; the permutation test cannot detect this. Unresolved."
+No independent test set / external cohort,LIMITATION,"n = 51 from one dataset. 'Final test' = outer cross-validation folds; generalisation to new children, sites or cameras is untested."
+Uncertainty intervals are conditional,LIMITATION,Bootstrap CIs resample the same 51 subjects with trained models fixed; repeated CV re-partitions the same subjects. Neither includes cohort-level or site-level variability.
+Repetition-aware features,LIMITATION,"No statistically supported classification advantage over static means (5 paired folds, under-powered); FRI is a proposed, not clinically validated, index."
+Restored position error features,PASS,"All 6 position error features present and validated: ['position_error_mm_mean', 'position_error_mm_sd', 'position_error_mm_cv', 'position_error_mm_slope', 'position_error_mm_early_late_change', 'position_error_mm_monotonicity']"

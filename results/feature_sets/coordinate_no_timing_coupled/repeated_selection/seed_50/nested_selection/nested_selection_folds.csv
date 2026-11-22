@@ -1,0 +1,6 @@
+fold,model,inner_accuracy,best_parameters,accuracy,balanced_accuracy,f1,roc_auc
+1,Linear_SVM,0.95,"{'k': 40, 'C': 1.0}",1.0,1.0,1.0,1.0
+2,KNN,0.9022727272727272,"{'k': 20, 'n_neighbors': 7, 'weights': 'uniform'}",1.0,1.0,1.0,1.0
+3,AdaBoost,0.9295454545454546,"{'k': 40, 'learning_rate': 0.1, 'n_estimators': 100}",0.9,0.875,0.9230769230769232,1.0
+4,Extra_Trees,0.975,"{'k': 20, 'max_depth': None, 'min_samples_leaf': 1}",0.8181818181818182,0.8888888888888888,0.875,0.8333333333333333
+5,Random_Forest,0.9772727272727272,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 1}",0.9,0.9285714285714286,0.9230769230769232,0.9047619047619048

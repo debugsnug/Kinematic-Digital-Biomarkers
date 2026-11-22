@@ -1,0 +1,18 @@
+movement_duration_s == (n_frames-1)/25 on all repetitions: True; repetition-level Pearson r = 1.0000; subject-level mean-duration vs mean-clip-length r = 1.0000
+Mean clip length (frames): DCP 65.2 (SD 81.4), TD 29.4 (SD 7.3); Mann-Whitney p = 5.8e-05
+Primary predictors with |Spearman| >= 0.7 vs clip length: 6 of 84
+Top 12 by |rho|:
+  movement_duration_s_mean: +1.00
+  smoothness_norm_jerk_mean: +0.96
+  smoothness_norm_jerk_sd: +0.92
+  movement_duration_s_sd: +0.84
+  smoothness_sparc_mean: -0.82
+  variability_speed_cv_mean: +0.72
+  peak_velocity_mm_s_cv: +0.68
+  peak_acceleration_mm_s2_cv: +0.67
+  variability_speed_cv_sd: +0.66
+  path_efficiency_mean: -0.64
+  mean_acceleration_mm_s2_mean: -0.64
+  trajectory_length_mm_sd: +0.63
+Interpretation: duration is a legitimate clinical timing measure OR a recording/trimming artefact; the supplied metadata cannot separate the two.
+Many other predictors are correlated with duration, so excluding movement_duration_s alone does not remove all timing information.

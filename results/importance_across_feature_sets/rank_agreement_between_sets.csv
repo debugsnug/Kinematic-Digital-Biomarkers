@@ -1,0 +1,16 @@
+set_a,set_b,n_common_features,spearman,top5_overlap
+coordinate_only,angle_enhanced,14,0.9780219780219781,4
+coordinate_only,coordinate_no_position_error,13,0.9945054945054945,4
+coordinate_only,coordinate_no_duration,13,0.967032967032967,4
+coordinate_only,coordinate_no_duration_no_position_error,12,0.9860139860139862,4
+coordinate_only,coordinate_no_timing_coupled,11,0.990909090909091,4
+angle_enhanced,coordinate_no_position_error,13,0.9835164835164836,5
+angle_enhanced,coordinate_no_duration,13,0.9615384615384615,5
+angle_enhanced,coordinate_no_duration_no_position_error,12,0.9720279720279721,5
+angle_enhanced,coordinate_no_timing_coupled,11,0.9818181818181818,5
+coordinate_no_position_error,coordinate_no_duration,12,0.9720279720279721,5
+coordinate_no_position_error,coordinate_no_duration_no_position_error,12,0.9930069930069931,5
+coordinate_no_position_error,coordinate_no_timing_coupled,10,0.9999999999999999,5
+coordinate_no_duration,coordinate_no_duration_no_position_error,12,0.9790209790209792,5
+coordinate_no_duration,coordinate_no_timing_coupled,11,0.9636363636363637,5
+coordinate_no_duration_no_position_error,coordinate_no_timing_coupled,10,0.9999999999999999,5

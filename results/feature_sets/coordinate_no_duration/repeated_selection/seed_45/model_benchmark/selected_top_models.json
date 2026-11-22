@@ -1,0 +1,41 @@
+{
+    "dataset": "experiment_dataset_coord_no_duration.csv",
+    "n_predictors": 78,
+    "cv_seed": 45,
+    "selection_criterion": "inner_accuracy_mean on training folds only (no outer test score used in ranking; ties by model name). Ranking pools inner-CV over all outer folds, so the top-3's outer-fold results are optimistic - see results/nested_selection for the selection-unbiased estimate.",
+    "n_selected": 3,
+    "selected_models": [
+        "RBF_SVM",
+        "Gaussian_NB",
+        "Extra_Trees"
+    ],
+    "details": [
+        {
+            "rank": 1,
+            "model": "RBF_SVM",
+            "inner_accuracy_mean": 0.9309090909090909,
+            "inner_accuracy_std": 0.021356381746970004,
+            "test_accuracy_mean": 0.9036363636363637,
+            "test_accuracy_std": 0.06447499355089868,
+            "test_roc_auc_mean": 0.9694444444444444
+        },
+        {
+            "rank": 2,
+            "model": "Gaussian_NB",
+            "inner_accuracy_mean": 0.9268181818181818,
+            "inner_accuracy_std": 0.016961916506404814,
+            "test_accuracy_mean": 0.9036363636363637,
+            "test_accuracy_std": 0.06447499355089868,
+            "test_roc_auc_mean": 0.9694444444444444
+        },
+        {
+            "rank": 3,
+            "model": "Extra_Trees",
+            "inner_accuracy_mean": 0.9218181818181816,
+            "inner_accuracy_std": 0.020174855473792837,
+            "test_accuracy_mean": 0.9018181818181817,
+            "test_accuracy_std": 0.004065578140908685,
+            "test_roc_auc_mean": 0.9694444444444444
+        }
+    ]
+}

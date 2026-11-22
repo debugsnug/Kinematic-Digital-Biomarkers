@@ -1,0 +1,16 @@
+model,fold,best_params,best_inner_accuracy
+MLP,1,"{'k': 40, 'alpha': 0.1, 'hidden_layer_sizes': (16,)}",0.9022727272727273
+MLP,2,"{'k': 40, 'alpha': 0.0001, 'hidden_layer_sizes': (32,)}",0.9522727272727273
+MLP,3,"{'k': 20, 'alpha': 0.0001, 'hidden_layer_sizes': (32,)}",0.9249999999999999
+MLP,4,"{'k': 20, 'alpha': 0.1, 'hidden_layer_sizes': (32,)}",0.9318181818181819
+MLP,5,"{'k': 40, 'alpha': 0.1, 'hidden_layer_sizes': (16,)}",0.925
+Extra_Trees,1,"{'k': 20, 'max_depth': None, 'min_samples_leaf': 1}",0.8772727272727272
+Extra_Trees,2,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 1}",0.9522727272727273
+Extra_Trees,3,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 2}",0.9249999999999999
+Extra_Trees,4,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 1}",0.9318181818181819
+Extra_Trees,5,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 2}",0.9249999999999999
+RBF_SVM,1,"{'k': 40, 'C': 10.0, 'gamma': 'scale'}",0.9022727272727272
+RBF_SVM,2,"{'k': 40, 'C': 1.0, 'gamma': 'scale'}",0.9522727272727273
+RBF_SVM,3,"{'k': 40, 'C': 1.0, 'gamma': 'scale'}",0.9
+RBF_SVM,4,"{'k': 20, 'C': 10.0, 'gamma': 'scale'}",0.9318181818181819
+RBF_SVM,5,"{'k': 20, 'C': 1.0, 'gamma': 'scale'}",0.925

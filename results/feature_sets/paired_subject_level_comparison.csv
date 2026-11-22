@@ -1,0 +1,6 @@
+comparison,accuracy_difference,bootstrap_ci95_low,bootstrap_ci95_high,subjects_only_other_correct,subjects_only_primary_correct,exact_mcnemar_p
+angle_enhanced minus coordinate_only (nested accuracy),0.03921568627450989,-0.05882352941176472,0.13725490196078427,4,2,0.6875
+coordinate_no_position_error minus coordinate_only (nested accuracy),0.05882352941176472,0.0,0.13725490196078427,3,0,0.25
+coordinate_no_duration minus coordinate_only (nested accuracy),0.019607843137254943,0.0,0.05882352941176472,1,0,1.0
+coordinate_no_duration_no_position_error minus coordinate_only (nested accuracy),0.0,-0.05882352941176472,0.05882352941176472,1,1,1.0
+coordinate_no_timing_coupled minus coordinate_only (nested accuracy),0.019607843137254943,-0.03921568627450989,0.07843137254901966,2,1,1.0

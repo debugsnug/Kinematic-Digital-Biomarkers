@@ -1,0 +1,6 @@
+fold,model,inner_accuracy,best_parameters,accuracy,balanced_accuracy,f1,roc_auc
+1,Random_Forest,0.95,"{'k': 20, 'max_depth': None, 'min_samples_leaf': 2}",0.8181818181818182,0.8166666666666667,0.8,0.9666666666666668
+2,HistGradientBoosting,0.9772727272727272,"{'k': 20, 'learning_rate': 0.1, 'max_iter': 100, 'min_samples_leaf': 5}",0.9,0.9,0.9090909090909092,1.0
+3,Gaussian_NB,0.9522727272727272,"{'k': 40, 'var_smoothing': 0.001}",0.8,0.7619047619047619,0.8571428571428571,0.9523809523809524
+4,AdaBoost,0.95,"{'k': 40, 'learning_rate': 1.0, 'n_estimators': 200}",0.8,0.7916666666666667,0.8333333333333334,0.9166666666666669
+5,RBF_SVM,0.9772727272727272,"{'k': 40, 'C': 10.0, 'gamma': 'scale'}",0.9,0.9285714285714286,0.9230769230769232,0.9523809523809524

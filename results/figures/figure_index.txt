@@ -1,0 +1,21 @@
+STEP 14 — FIGURE INDEX
+=======================
+
+Figure_1_ablation_performance.png
+Figure_2_feature_stability.png
+Figure_3_effect_sizes.png
+Figure_4_01_mean_lateral_deviation_mm_mean.png
+Figure_4_02_max_lateral_deviation_mm_mean.png
+Figure_4_03_peak_acceleration_mm_s2_cv.png
+Figure_4_04_path_efficiency_sd.png
+Figure_4_05_max_lateral_deviation_mm_sd.png
+Figure_4_06_position_error_mm_sd.png
+Figure_4_07_path_efficiency_mean.png
+Figure_4_08_mean_acceleration_mm_s2_cv.png
+Figure_4_09_peak_velocity_mm_s_cv.png
+Figure_4_10_position_error_mm_cv.png
+Figure_4_11_mean_lateral_deviation_mm_sd.png
+Figure_4_12_mean_velocity_mm_s_cv.png
+Figure_5_feature_importance.png
+Figure_6_ROC_curves.png
+Figure_7_Precision_Recall_curves.png

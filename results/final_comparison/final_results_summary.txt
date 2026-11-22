@@ -1,0 +1,140 @@
+FINAL PROJECT RESULTS SUMMARY
+======================================================================
+
+1. COURSE & PROJECT CONTEXT
+Course: 23CSE365 Internet of Things – Amrita Vishwa Vidyapeetham
+Dataset: KU Leuven Markerless Motion Capture (DOI: 10.48804/BZM9SJ)
+Published Reference: Vanmechelen et al., Journal of Biomechanics, 2024
+
+2. TARGET VARIABLE & CLASS SPECIFICATION
+Prediction Task: Binary Classification of Upper-Limb Motor Impairment
+Target Variable: target (derived from clinical group)
+  - Class 1: Dyskinetic Cerebral Palsy (DCP), N = 30 (58.8%)
+  - Class 0: Typically Developing controls (TD), N = 21 (41.2%)
+Total Participants: 51 unique subjects (408 reaching-sideways trials, 8 reps/subject)
+Prediction Unit: 1 row per subject (no intra-subject data leakage)
+
+3. RIGOROUS SUBJECT-WISE DATA PARTITIONING & LEAKAGE PREVENTION
+Cross-Validation: 5-Fold Stratified Group Cross-Validation (StratifiedGroupKFold)
+Subject Isolation: Exactly 0 subjects shared across train and test partitions (one row per subject, grouped splits)
+Pipeline Encapsulation: Median Imputer, StandardScaler, and Mutual Information SelectKBest
+                      fit ONLY on training folds inside each cross-validation iteration.
+Temporal & Identifier Leakage: Subject IDs and metadata dropped; repetition trends computed strictly intra-subject.
+
+4. COMPLETE 16-MODEL BENCHMARK (Ranked by Inner-Validation Accuracy; Test* = outer-fold results; ranking itself pools inner CV over all folds):
+  01. MLP: InnerAcc = 0.9273 +/- 0.0179 | TestAcc = 0.8836 +/- 0.0366 | TestBAcc = 0.8994 +/- 0.0180 | TestF1 = 0.8878 +/- 0.0224 | TestAUC = 0.9044 +/- 0.0654
+  02. Extra_Trees: InnerAcc = 0.9223 +/- 0.0275 | TestAcc = 0.8836 +/- 0.0366 | TestBAcc = 0.9078 +/- 0.0128 | TestF1 = 0.8982 +/- 0.0157 | TestAUC = 0.9722 +/- 0.0393
+  02. RBF_SVM: InnerAcc = 0.9223 +/- 0.0218 | TestAcc = 0.9036 +/- 0.0645 | TestBAcc = 0.9194 +/- 0.0485 | TestF1 = 0.9101 +/- 0.0550 | TestAUC = 0.9639 +/- 0.0362
+  04. Gaussian_NB: InnerAcc = 0.9218 +/- 0.0338 | TestAcc = 0.9218 +/- 0.0832 | TestBAcc = 0.9306 +/- 0.0856 | TestF1 = 0.9367 +/- 0.0698 | TestAUC = 0.9833 +/- 0.0373
+  05. Linear_SVM: InnerAcc = 0.9182 +/- 0.0285 | TestAcc = 0.9036 +/- 0.0645 | TestBAcc = 0.9194 +/- 0.0485 | TestF1 = 0.9101 +/- 0.0550 | TestAUC = 0.9722 +/- 0.0260
+  06. Random_Forest: InnerAcc = 0.9173 +/- 0.0286 | TestAcc = 0.9236 +/- 0.0773 | TestBAcc = 0.9411 +/- 0.0547 | TestF1 = 0.9386 +/- 0.0577 | TestAUC = 0.9917 +/- 0.0186
+  07. Logistic_L2: InnerAcc = 0.8991 +/- 0.0259 | TestAcc = 0.9036 +/- 0.0645 | TestBAcc = 0.9244 +/- 0.0439 | TestF1 = 0.9164 +/- 0.0489 | TestAUC = 0.9322 +/- 0.0768
+  08. KNN: InnerAcc = 0.8941 +/- 0.0259 | TestAcc = 0.9236 +/- 0.0773 | TestBAcc = 0.9444 +/- 0.0520 | TestF1 = 0.9386 +/- 0.0577 | TestAUC = 0.9528 +/- 0.0559
+  09. AdaBoost: InnerAcc = 0.8923 +/- 0.0519 | TestAcc = 0.8836 +/- 0.0366 | TestBAcc = 0.9078 +/- 0.0128 | TestF1 = 0.8982 +/- 0.0157 | TestAUC = 0.9778 +/- 0.0497
+  10. LDA: InnerAcc = 0.8882 +/- 0.0287 | TestAcc = 0.8055 +/- 0.0937 | TestBAcc = 0.8267 +/- 0.0794 | TestF1 = 0.8087 +/- 0.0751 | TestAUC = 0.9211 +/- 0.0839
+  11. Logistic_L1: InnerAcc = 0.8877 +/- 0.0247 | TestAcc = 0.8836 +/- 0.0796 | TestBAcc = 0.9028 +/- 0.0748 | TestF1 = 0.8886 +/- 0.0903 | TestAUC = 0.9444 +/- 0.0428
+  12. HistGradientBoosting: InnerAcc = 0.8823 +/- 0.0920 | TestAcc = 0.8236 +/- 0.0830 | TestBAcc = 0.8578 +/- 0.0679 | TestF1 = 0.8441 +/- 0.0791 | TestAUC = 0.9792 +/- 0.0361
+  13. Gradient_Boosting: InnerAcc = 0.8682 +/- 0.0841 | TestAcc = 0.8618 +/- 0.0566 | TestBAcc = 0.8856 +/- 0.0502 | TestF1 = 0.8719 +/- 0.0669 | TestAUC = 0.9093 +/- 0.0849
+  14. XGBoost: InnerAcc = 0.8536 +/- 0.0791 | TestAcc = 0.8436 +/- 0.0878 | TestBAcc = 0.8744 +/- 0.0706 | TestF1 = 0.8659 +/- 0.0789 | TestAUC = 0.9806 +/- 0.0271
+  15. Decision_Tree: InnerAcc = 0.8423 +/- 0.0937 | TestAcc = 0.8618 +/- 0.1149 | TestBAcc = 0.8856 +/- 0.0973 | TestF1 = 0.8755 +/- 0.1102 | TestAUC = 0.8856 +/- 0.0973
+  16. Polynomial_SVM: InnerAcc = 0.6441 +/- 0.0752 | TestAcc = 0.6345 +/- 0.2877 | TestBAcc = 0.7161 +/- 0.1821 | TestF1 = 0.5225 +/- 0.4013 | TestAUC = 0.9639 +/- 0.0362
+
+5. LEAK-FREE MODEL SELECTION & TOP-3 VALIDATION STAGE:
+Selection Criterion: Highest inner-validation accuracy on training folds (no outer-test score used; ranking pools inner CV across folds, so outer-fold results are optimistic)
+Selected Models: MLP, Extra_Trees, RBF_SVM
+
+Out-of-Fold Validation Performance of Selected Models:
+  * Extra_Trees: Accuracy = 0.8836 +/- 0.0366, Balanced Accuracy = 0.9078 +/- 0.0128, F1 = 0.8982 +/- 0.0157, Sensitivity = 0.8889 +/- 0.1039, Specificity = 0.9267 +/- 0.1011, ROC-AUC = 0.9722 +/- 0.0393, PR-AUC = 0.9894 +/- 0.0180, MCC = 0.7779 +/- 0.0863, Brier Score = 0.0675 +/- 0.0307
+  * MLP: Accuracy = 0.8836 +/- 0.0366, Balanced Accuracy = 0.8994 +/- 0.0180, F1 = 0.8878 +/- 0.0224, Sensitivity = 0.7989 +/- 0.0361, Specificity = 1.0000 +/- 0.0000, ROC-AUC = 0.9044 +/- 0.0654, PR-AUC = 0.9491 +/- 0.0377, MCC = 0.7750 +/- 0.0849, Brier Score = 0.1082 +/- 0.0338
+  * RBF_SVM: Accuracy = 0.9036 +/- 0.0645, Balanced Accuracy = 0.9194 +/- 0.0485, F1 = 0.9101 +/- 0.0550, Sensitivity = 0.8389 +/- 0.0970, Specificity = 1.0000 +/- 0.0000, ROC-AUC = 0.9639 +/- 0.0362, PR-AUC = 0.9847 +/- 0.0177, MCC = 0.8117 +/- 0.1332, Brier Score = nan +/- nan
+
+6. REPRESENTATION ABLATION STUDY:
+Compares Static Biomarkers vs. Repetition-Aware Descriptors vs. Stable Features:
+  - Repetition_Aware: Accuracy = 0.9236 +/- 0.0773, F1 = 0.9386 +/- 0.0577, ROC-AUC = 1.0000 +/- 0.0000
+  - Stable_Features: Accuracy = 0.9036 +/- 0.0645, F1 = 0.9164 +/- 0.0489, ROC-AUC = 0.9698 +/- 0.0484
+  - Static: Accuracy = 0.9418 +/- 0.0532, F1 = 0.9478 +/- 0.0511, ROC-AUC = 0.9889 +/- 0.0248
+
+7. KEY FINDINGS (generated from the results above):
+- Top-3 by inner-validation accuracy: MLP, Extra_Trees, RBF_SVM; tree ensembles and a linear SVM are competitive, and differences among them are within one fold-SD.
+- Repetition-aware descriptors did NOT show a statistically supported advantage over static per-subject means (accuracy 0.924 vs 0.942; ROC-AUC 1.000 vs 0.989; smallest FDR-adjusted Wilcoxon p = 1.00, n = 5 paired folds, i.e. under-powered). The claim that repetition-derived features add discriminative value is therefore not demonstrated for DCP-vs-TD classification on this dataset.
+- Path-straightness features (path efficiency, lateral deviation) are the strongest univariate and model-based separators.
+
+7b. FULLY NESTED ESTIMATE OF THE WHOLE SELECTION PROCEDURE (primary, selection-unbiased estimate):
+  Procedure: tune all 16 models by inner CV, keep the family with the best inner-CV accuracy, evaluate it on unseen subjects - with model family AND hyperparameters chosen separately INSIDE every outer training fold (winners per fold: HistGradientBoosting, Extra_Trees, Extra_Trees, Gaussian_NB, Linear_SVM).
+  Pooled over the 51 held-out subjects (95% subject-level bootstrap CI): Accuracy = 0.824 [0.706, 0.922]; Balanced accuracy = 0.814 [0.699, 0.918]; F1 = 0.852 [0.745, 0.935]; MCC = 0.634 [0.403, 0.840]; Sensitivity = 0.867 [0.733, 0.970]; Specificity = 0.762 [0.565, 0.941].
+  Per-fold accuracy mean +/- SD = 0.824 +/- 0.083.
+  The top-3 families of Table 2 were ranked with inner-CV scores averaged over ALL outer folds, i.e. a ranking that indirectly used every subject; their outer-fold numbers are therefore optimistic for 'the procedure' and must NOT be quoted as an unbiased estimate. They answer a different question: how well do these three fixed model families work (validation stage required by the project). Quote the figure above as the expected performance of the end-to-end procedure.
+
+8. REPEATED SUBJECT-WISE NESTED CV (10 re-partitions of the same 51 subjects; mean [95% CI of repeat means]; captures split randomness only; it is NOT generalisation uncertainty - see the uncertainty note below):
+  * Extra_Trees: Acc = 0.906 [0.891, 0.920], BalAcc = 0.909 [0.893, 0.926], F1 = 0.918 [0.905, 0.930], AUC = 0.968 [0.958, 0.977]
+  * MLP: Acc = 0.904 [0.890, 0.918], BalAcc = 0.913 [0.900, 0.925], F1 = 0.913 [0.899, 0.927], AUC = 0.952 [0.929, 0.975]
+  * RBF_SVM: Acc = 0.900 [0.881, 0.919], BalAcc = 0.909 [0.890, 0.929], F1 = 0.910 [0.892, 0.927], AUC = 0.969 [0.959, 0.979]
+
+9. EMPIRICAL LEAKAGE CHECK (label permutation, same subject-wise pipeline):
+  Real balanced accuracy = 0.910; permuted-label mean = 0.480 (SD 0.083, 95th pct 0.624); permutation p <= 0.0010 (1/1001 floor; single fixed Random Forest, not the 16-model selection) (1000 permutations).
+  Metadata-only baselines (excluded from predictors): subject-ID number alone reaches balanced accuracy 0.869 (identifier leakage risk if used); arm side alone 0.448.
+
+9b. FUNCTIONAL RESILIENCE MODEL (rep1-rep8; subject-intrinsic, label-free indices):
+  * Functional_Resilience_Index: TD median 0.943 vs DCP 0.916; Cohen d (DCP-TD) = -0.85 [-1.44, -0.35]; stand-alone AUC (higher = TD) = 0.75 [0.60, 0.88]; BH-FDR p = 0.0068
+  * Functional_Resilience_Index_no_position_error: TD median 0.938 vs DCP 0.907; Cohen d (DCP-TD) = -0.68 [-1.22, -0.19]; stand-alone AUC (higher = TD) = 0.69 [0.54, 0.83]; BH-FDR p = 0.0369
+  * Consistency_Score: TD median 0.900 vs DCP 0.875; Cohen d (DCP-TD) = -0.90 [-1.38, -0.52]; stand-alone AUC (higher = TD) = 0.75 [0.61, 0.87]; BH-FDR p = 0.0068
+  * Movement_Stability_Index: TD median 0.860 vs DCP 0.840; Cohen d (DCP-TD) = -0.60 [-1.08, -0.15]; stand-alone AUC (higher = TD) = 0.66 [0.50, 0.80]; BH-FDR p = 0.0762
+  * Adaptive_Motor_Control_Index: TD median 0.023 vs DCP 0.048; Cohen d (DCP-TD) = 0.32 [-0.17, 0.79]; stand-alone AUC (higher = TD) = 0.42 [0.27, 0.59]; BH-FDR p = 0.3633
+  * FRI_no_timing_coupled_sensitivity: TD median 0.940 vs DCP 0.921; Cohen d (DCP-TD) = -0.34 [-1.07, 0.24]; stand-alone AUC (higher = TD) = 0.64 [0.48, 0.80]; BH-FDR p = 0.1012
+  * FRI_duration_included_legacy_sensitivity_only: TD median 0.945 vs DCP 0.918; Cohen d (DCP-TD) = -0.97 [-1.47, -0.53]; stand-alone AUC (higher = TD) = 0.78 [0.65, 0.90]; BH-FDR p = 0.0044
+  - Resilience_indices_only: acc 0.616 +/- 0.062, AUC 0.646 nan
+  - Static_means: acc 0.937 +/- 0.015, AUC 0.954 nan
+  - Static_means+Resilience_indices: acc 0.953 +/- 0.014, AUC 0.959 paired diff in balanced acc vs static: +0.021 (SD over repeats 0.014; repeats share the same 51 subjects)
+  FRI is a PROPOSED index (equal weights for consistency and maintenance; not clinically validated). Weight sensitivity (consistency weight 0.25/0.50/0.75): Cohen d = -0.63 / -0.85 / -0.95; AUC = 0.72 / 0.75 / 0.77.
+  Interpretation: DCP children show lower consistency/resilience across repetitions (group difference), but adding the indices to the static per-subject means does not measurably improve classification; resilience is reported as a descriptive/explanatory biomarker, not as a better classifier input.
+
+9c. LIME (out-of-fold) vs SHAP:
+  Spearman rho over all features = 0.84; top-15 overlap = 13/15 (Jaccard 0.76); top-5 LIME features: path_efficiency_mean, max_lateral_deviation_mm_mean, path_efficiency_cv, mean_lateral_deviation_mm_mean, trajectory_length_mm_cv.
+
+9e. FEATURE-SET COMPARISON (same outer folds; fully nested whole-procedure estimate; PRIMARY = coordinate_only, 84 predictors):
+  * coordinate_only (84 predictors): nested Acc = 0.824 [0.706, 0.922], BalAcc = 0.814, F1 = 0.852, MCC = 0.634; top-3 by inner CV: MLP, Extra_Trees, RBF_SVM
+  * angle_enhanced (168 predictors): nested Acc = 0.863 [0.765, 0.941], BalAcc = 0.862, F1 = 0.881, MCC = 0.719; top-3 by inner CV: Linear_SVM, Extra_Trees, Random_Forest
+  * coordinate_no_position_error (78 predictors): nested Acc = 0.882 [0.784, 0.961], BalAcc = 0.886, F1 = 0.897, MCC = 0.763; top-3 by inner CV: MLP, Linear_SVM, RBF_SVM
+  * coordinate_no_duration (78 predictors): nested Acc = 0.843 [0.745, 0.941], BalAcc = 0.838, F1 = 0.867, MCC = 0.676; top-3 by inner CV: Linear_SVM, MLP, RBF_SVM
+  * coordinate_no_duration_no_position_error (72 predictors): nested Acc = 0.824 [0.706, 0.922], BalAcc = 0.821, F1 = 0.847, MCC = 0.639; top-3 by inner CV: Extra_Trees, Gaussian_NB, Linear_SVM
+  * coordinate_no_timing_coupled (66 predictors): nested Acc = 0.843 [0.725, 0.941], BalAcc = 0.831, F1 = 0.871, MCC = 0.674; top-3 by inner CV: Random_Forest, MLP, RBF_SVM
+  - angle_enhanced minus coordinate_only (nested accuracy): diff = +0.039 (bootstrap 95% CI [-0.059, +0.137], exact McNemar p = 0.69)
+  - coordinate_no_position_error minus coordinate_only (nested accuracy): diff = +0.059 (bootstrap 95% CI [+0.000, +0.137], exact McNemar p = 0.25)
+  - coordinate_no_duration minus coordinate_only (nested accuracy): diff = +0.020 (bootstrap 95% CI [+0.000, +0.059], exact McNemar p = 1.00)
+  - coordinate_no_duration_no_position_error minus coordinate_only (nested accuracy): diff = +0.000 (bootstrap 95% CI [-0.059, +0.059], exact McNemar p = 1.00)
+  - coordinate_no_timing_coupled minus coordinate_only (nested accuracy): diff = +0.020 (bootstrap 95% CI [-0.039, +0.078], exact McNemar p = 1.00)
+  Ablations: coordinate_no_position_error (target-object feature), coordinate_no_duration (movement_duration_s = recording clip length), coordinate_no_duration_no_position_error, coordinate_no_timing_coupled (also drops normalised jerk and SPARC, which track duration). Compare the rows above: differences between sets are not statistically distinguishable at n = 51 unless the paired CI above excludes 0. The 168-predictor angle_enhanced set uses 2D video-derived joint angles (dataset paper 2.4) and is SECONDARY.
+
+9e-2. RECORDING-DURATION AUDIT (results/duration_audit):
+  movement_duration_s == (n_frames-1)/25 on all repetitions: True; repetition-level Pearson r = 1.0000; subject-level mean-duration vs mean-clip-length r = 1.0000
+  Mean clip length (frames): DCP 65.2 (SD 81.4), TD 29.4 (SD 7.3); Mann-Whitney p = 5.8e-05
+  Primary predictors with |Spearman| >= 0.7 vs clip length: 6 of 84
+
+9e-3. PER-OUTER-FOLD TOP-3 (selection-unbiased version of requirement 6; top-3 chosen from inner CV inside each outer training fold):
+  rank1_slot: accuracy 0.824 [0.706, 0.922]
+  rank2_slot: accuracy 0.863 [0.765, 0.941]
+  rank3_slot: accuracy 0.843 [0.745, 0.941]
+  majority_vote_of_top3: accuracy 0.863 [0.765, 0.941]
+  (rank slots = model ranked 1st/2nd/3rd in each fold; families differ between folds; majority vote = label vote of the three selected models.)
+  HISTORICAL: an earlier 168-predictor full-feature run is superseded; the angle_enhanced row above is its current, re-run equivalent.
+
+9f. WHOLE SELECTION PROCEDURE REPEATED OVER 10 SUBJECT-WISE PARTITIONS (primary set; each repetition re-runs the complete 16-model nested selection):
+  Accuracy mean = 0.855 (SD across partitions 0.030; min 0.824, max 0.902); balanced accuracy = 0.852; MCC = 0.703; mean fold AUC = 0.929.
+  The seed-42 partition is the fixed default headline (set before inspecting results); it is at the low end of the ten partitions (tied lowest), so the repeated mean is shown alongside rather than substituted. Same 51 subjects: split sensitivity only.
+
+9g. ACQUISITION CONFOUND: see results/confound_analysis/confound_summary.txt. Group and recording batch cannot be separated; high accuracy may partly reflect recording setup; independent site-balanced validation required.
+
+9d. HOW TO READ THE UNCERTAINTY NUMBERS:
+- Fold SD (+/-): spread of 5 outer folds of ~10 subjects each; coarse (10-point steps), not a CI.
+- Repeated-split variability (Table 3): re-partitions the SAME 51 subjects; shows sensitivity to the split only. Intervals are too narrow to be read as generalisation uncertainty.
+- Bootstrap CIs on pooled out-of-fold predictions (Tables 1b, 2): resample the 51 subjects, so they reflect subject-sampling noise in the test predictions, but they hold the trained models fixed and (for Table 2) the model-family choice fixed; they do not include training-set or model-selection variability. Table 1b includes selection inside every fold but still not the variability of re-drawing a different training cohort.
+- None of them measure generalisation to new sites, scanners, clinicians or populations: all data come from one dataset (site/acquisition confound unresolved).
+- 'Final test' = outer cross-validation folds. There is NO independent hold-out or external test set (impossible with n = 51 without discarding ~20% of subjects).
+
+10. LIMITATIONS
+- n = 51 subjects (about 10 test subjects per fold): fold-level metrics move in ~10-point steps; report CIs/variance, not point values. All estimates are pilot-level.
+- Acquisition confound: the supplied data contain no site/session/camera variable and subject-number blocks are structured by group (see results/confound_analysis/confound_summary.txt); the dataset paper describes per-lab DeepLabCut models, so recording setup cannot be separated from group effects. High accuracy may partly reflect recording setup; an independent, site-balanced cohort is needed.
+- Pixel-to-mm conversion uses a fixed 2 mm/pixel (paper reports it is approximated from target size); absolute-length features are approximate.
+- DCP-vs-TD is an easy, large-effect task; high scores do not imply clinical severity grading or generalisation to other populations.
+- Model ranking by inner-CV accuracy is itself noisy at this n; the top-3 are statistically indistinguishable.
+- No external test cohort and no independent hold-out set: nested subject-wise CV is the evaluation; recording-site/acquisition confounding remains UNRESOLVED (no site variable to adjust for; a subject-ID-only baseline already separates the groups).

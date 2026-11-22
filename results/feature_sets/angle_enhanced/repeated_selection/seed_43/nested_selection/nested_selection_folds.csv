@@ -1,0 +1,6 @@
+fold,model,inner_accuracy,best_parameters,accuracy,balanced_accuracy,f1,roc_auc
+1,KNN,0.925,"{'k': 20, 'n_neighbors': 5, 'weights': 'uniform'}",0.9,0.9,0.8888888888888888,0.98
+2,Linear_SVM,0.8818181818181818,"{'k': 20, 'C': 0.1}",1.0,1.0,1.0,1.0
+3,MLP,0.975,"{'k': 20, 'alpha': 0.0001, 'hidden_layer_sizes': (16,)}",0.8,0.7916666666666667,0.8333333333333334,0.9166666666666669
+4,Extra_Trees,0.925,"{'k': 20, 'max_depth': None, 'min_samples_leaf': 1}",0.8181818181818182,0.8035714285714286,0.8571428571428571,0.9642857142857144
+5,Random_Forest,0.95,"{'k': 20, 'max_depth': None, 'min_samples_leaf': 1}",0.9,0.9375,0.9333333333333332,0.9375

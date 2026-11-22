@@ -1,0 +1,6 @@
+fold,best_params,outer_accuracy
+1,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 20}",1.0
+2,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 40}",1.0
+3,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 40}",0.9
+4,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 40}",0.9
+5,"{'model__max_depth': None, 'model__min_samples_leaf': 1, 'selector__k': 20}",0.8181818181818182

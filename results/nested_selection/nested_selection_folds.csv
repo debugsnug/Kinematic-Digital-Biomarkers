@@ -1,0 +1,6 @@
+fold,model,inner_accuracy,best_parameters,accuracy,balanced_accuracy,f1,roc_auc
+1,HistGradientBoosting,0.975,"{'k': 20, 'learning_rate': 0.05, 'max_iter': 100, 'min_samples_leaf': 5}",0.7,0.75,0.7272727272727273,0.9791666666666669
+2,Extra_Trees,0.9522727272727272,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 1}",0.9,0.9166666666666669,0.9090909090909092,1.0
+3,Extra_Trees,0.925,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 2}",0.9,0.9,0.9090909090909092,1.0
+4,Gaussian_NB,0.9545454545454546,"{'k': 40, 'var_smoothing': 1e-09}",0.8,0.7916666666666667,0.8333333333333334,0.9166666666666669
+5,Linear_SVM,0.95,"{'k': 40, 'C': 0.1}",0.8181818181818182,0.8888888888888888,0.875,0.9444444444444444

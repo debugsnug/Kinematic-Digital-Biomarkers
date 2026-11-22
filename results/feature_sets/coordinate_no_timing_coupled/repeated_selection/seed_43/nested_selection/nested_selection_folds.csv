@@ -1,0 +1,6 @@
+fold,model,inner_accuracy,best_parameters,accuracy,balanced_accuracy,f1,roc_auc
+1,Extra_Trees,0.95,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 2}",1.0,1.0,1.0,1.0
+2,Linear_SVM,0.95,"{'k': 40, 'C': 0.1}",1.0,1.0,1.0,1.0
+3,RBF_SVM,0.975,"{'k': 20, 'C': 10.0, 'gamma': 'scale'}",0.9,0.9166666666666669,0.9090909090909092,0.9583333333333334
+4,Extra_Trees,0.925,"{'k': 20, 'max_depth': None, 'min_samples_leaf': 1}",1.0,1.0,1.0,1.0
+5,Linear_SVM,0.9772727272727272,"{'k': 40, 'C': 1.0}",0.8,0.875,0.8571428571428571,1.0

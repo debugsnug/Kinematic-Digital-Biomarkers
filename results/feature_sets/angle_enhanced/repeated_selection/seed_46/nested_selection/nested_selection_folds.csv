@@ -1,0 +1,6 @@
+fold,model,inner_accuracy,best_parameters,accuracy,balanced_accuracy,f1,roc_auc
+1,Random_Forest,0.9,"{'k': 40, 'max_depth': None, 'min_samples_leaf': 1}",1.0,1.0,1.0,1.0
+2,Gradient_Boosting,0.95,"{'k': 40, 'learning_rate': 0.05, 'max_depth': 2, 'n_estimators': 100}",0.9,0.9,0.9090909090909092,1.0
+3,AdaBoost,0.9522727272727272,"{'k': 20, 'learning_rate': 1.0, 'n_estimators': 50}",0.9,0.9285714285714286,0.9230769230769232,0.9523809523809524
+4,AdaBoost,0.925,"{'k': 20, 'learning_rate': 1.0, 'n_estimators': 50}",0.8,0.75,0.8571428571428571,0.9166666666666669
+5,KNN,0.9522727272727272,"{'k': 20, 'n_neighbors': 5, 'weights': 'uniform'}",0.8,0.7619047619047619,0.8571428571428571,0.9285714285714286
