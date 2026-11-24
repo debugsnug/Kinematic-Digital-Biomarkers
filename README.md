@@ -1,4 +1,4 @@
-# Explainable kinematic digital biomarkers: DCP vs TD upper-limb classification
+## Explainable kinematic digital biomarkers: DCP vs TD upper-limb classification
 
 Course project, IoT (23CSE365), Amrita Vishwa Vidyapeetham. Guide: Dr. Thangam S.
 Data: KU Leuven markerless video-derived upper-limb motion capture (DOI 10.48804/BZM9SJ; Vanmechelen et al., J. Biomechanics 2024).
