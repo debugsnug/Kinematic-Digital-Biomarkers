@@ -1,9 +1,57 @@
-# Explainable kinematic digital biomarkers: DCP vs TD upper-limb classification
+# Explainable Kinematic Digital Biomarkers for Upper-Limb Assessment in Dyskinetic Cerebral Palsy
 
-Course project, IoT (23CSE365), Amrita Vishwa Vidyapeetham. Guide: Dr. Thangam S.
-Data: KU Leuven markerless video-derived upper-limb motion capture (DOI 10.48804/BZM9SJ; Vanmechelen et al., J. Biomechanics 2024).
+**Course:** 23CSE365 Internet of Things — Amrita Vishwa Vidyapeetham  
+**Guide:** Dr. Thangam S.  
+**Data:** KU Leuven markerless video-derived upper-limb motion capture  
+(DOI 10.48804/BZM9SJ; Vanmechelen et al., *J. Biomechanics* 2024)
 
-Full audit with a verdict for each of the six course requirements: **`AUDIT_REPORT.md`** (this is the audit file; no other name is used anywhere). Demo: `docs/DEMO_GUIDE.md`. Readiness summary: `SUBMISSION_READINESS.md`.
+---
+
+## Quick-Start (run on your machine in < 5 minutes)
+
+```bash
+# 1. Clone
+git clone <repo-url>
+cd <project-folder>
+
+# 2. Create virtual environment
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# macOS/Linux:
+source .venv/bin/activate
+
+# 3. Install dependencies (all pinned for exact reproducibility)
+pip install -r requirements.txt
+
+# 4a. Run only the ML steps (uses existing preprocessed CSV — fastest):
+python run_pipeline.py --stage ml
+
+# 4b. Run everything from raw Excel files (~3.5 hours):
+python run_pipeline.py --clean
+```
+
+**The file used for all model training, testing and prediction is:**
+```
+data/processed/final_preprocessed_features_for_model_training_and_prediction.csv
+```
+This is the **primary preprocessed dataset** (84 coordinate-only features, 1 row per subject, 51 rows). It is identical to `experiment_dataset.csv` and is kept under this descriptive name for publication clarity.
+
+**To run only the new guide-requested experiments (Steps 44–46):**
+```bash
+# Train-test split experiments (70:30, 80:20, 90:10)
+python src/44_train_test_splits.py
+
+# SHAP + LIME for top-5 models + cross-model importance
+python src/45_shap_lime_top5_models.py
+
+# Deep learning extensions (exploratory)
+python src/46_dl_extensions.py
+```
+
+---
+
+## Full audit: **`AUDIT_REPORT.md`** | Demo: `docs/DEMO_GUIDE.md` | Readiness: `SUBMISSION_READINESS.md`
 
 ## What is predicted
 

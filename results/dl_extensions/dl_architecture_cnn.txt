@@ -1,0 +1,68 @@
+1D-CNN Architecture for Future Extension
+==========================================
+
+RATIONALE:
+  The current 84 features are summary statistics (mean, SD, CV, slope, etc.)
+  computed from per-frame trajectories. A 1D-CNN can learn temporal patterns
+  directly from the raw trajectory sequences (shape: 8 reps × T_frames × 3 joints)
+  without manual feature engineering, which is more scalable and potentially
+  more expressive on a larger dataset.
+
+PROPOSED ARCHITECTURE (PyTorch):
+  Input  : (batch, channels=3, time_steps=~65)
+           3 channels = x, y coordinates + resultant velocity per frame
+           time_steps = padded/trimmed to max clip length (~65 frames)
+
+  Block 1: Conv1D(in=3, out=32, kernel=5, padding=2) → BatchNorm → ReLU → MaxPool(2)
+  Block 2: Conv1D(in=32, out=64, kernel=3, padding=1) → BatchNorm → ReLU → MaxPool(2)
+  Block 3: Conv1D(in=64, out=128, kernel=3, padding=1) → BatchNorm → ReLU → AdaptiveAvgPool(1)
+  Flatten : (batch, 128)
+  FC      : Linear(128, 64) → Dropout(0.4) → ReLU → Linear(64, 1) → Sigmoid
+  Loss    : BCEWithLogitsLoss (class-weighted for 30 DCP : 21 TD)
+  Optimizer: Adam(lr=1e-3), weight_decay=1e-4
+  Epochs  : 150, early stopping patience=20
+
+MULTI-REP FUSION VARIANT:
+  Run the same 1D-CNN on each of the 8 repetitions independently, then
+  aggregate (mean pool or attention) before the classifier head. This
+  captures within-subject variability across repetitions.
+
+WHY THIS IS FUTURE WORK FOR n=51:
+  - 51 subjects with an 80:20 split = 40 train / 11 test.
+  - A CNN with ~50k parameters on 40 samples will massively overfit.
+  - Minimum recommended sample size for a 1D-CNN in a clinical classification
+    task: ~300–500 subjects (Raghu et al. 2019; Zhang et al. 2020).
+  - Required before this can be used: (a) a site-balanced external cohort,
+    (b) data augmentation (time warping, jitter, permutation), (c) pre-training
+    on a larger motion-capture corpus.
+
+SKETCH CODE (requires PyTorch — not installed in this environment):
+-----------------------------------------------------------------
+import torch
+import torch.nn as nn
+
+class ReachCNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.encoder = nn.Sequential(
+            nn.Conv1d(3, 32, kernel_size=5, padding=2),
+            nn.BatchNorm1d(32), nn.ReLU(), nn.MaxPool1d(2),
+            nn.Conv1d(32, 64, kernel_size=3, padding=1),
+            nn.BatchNorm1d(64), nn.ReLU(), nn.MaxPool1d(2),
+            nn.Conv1d(64, 128, kernel_size=3, padding=1),
+            nn.BatchNorm1d(128), nn.ReLU(),
+            nn.AdaptiveAvgPool1d(1),
+        )
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(128, 64), nn.Dropout(0.4), nn.ReLU(),
+            nn.Linear(64, 1),
+        )
+
+    def forward(self, x):  # x: (batch, 3, T)
+        return self.classifier(self.encoder(x)).squeeze(1)
+-----------------------------------------------------------------
+
+STATUS: Architecture documented. Training NOT attempted on n=51.
+Next step: Collect ≥300 subjects with site metadata, then run with
+5-fold subject-stratified CV and compare to the tabular pipeline.

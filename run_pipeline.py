@@ -204,11 +204,27 @@ def main():
         run_step("43_verify_reported_numbers.py", "Assert reported headline numbers equal the saved CSVs")
         run_step("25_leakage_audit.py", "Run comprehensive leakage and methodology audit")
 
+    # Stage 4: Guide-requested extensions (new steps 44-46)
+    # These run after the main pipeline and produce self-contained results.
+    # They use the named preprocessed CSV:
+    #   data/processed/final_preprocessed_features_for_model_training_and_prediction.csv
+    if args.stage in ["all", "ml"]:
+        run_step("44_train_test_splits.py",
+                 "Train-test split experiments (70:30, 80:20, 90:10) + comparison vs nested CV")
+        run_step("45_shap_lime_top5_models.py",
+                 "SHAP + LIME for top-5 models + cross-model feature importance")
+        run_step("46_dl_extensions.py",
+                 "Deep learning extensions: Extended MLP (exploratory) + 1D-CNN stub (future work)")
+
     total_time = time.time() - start_total
     print("\n" + "=" * 78)
     print(f"PIPELINE COMPLETE in {total_time:.1f}s ({total_time/60:.2f} minutes)")
-    print(f"Summary Report: results/final_comparison/final_results_summary.txt")
-    print(f"Audit Report  : results/leakage_audit/leakage_audit_report.txt")
+    print(f"Summary Report  : results/final_comparison/final_results_summary.txt")
+    print(f"Audit Report    : results/leakage_audit/leakage_audit_report.txt")
+    print(f"Split Experiments : results/train_test_splits/")
+    print(f"Explainability  : results/explainability_top5/")
+    print(f"DL Extensions   : results/dl_extensions/")
+    print(f"Preprocessed CSV: data/processed/final_preprocessed_features_for_model_training_and_prediction.csv")
     print("=" * 78)
 
 
