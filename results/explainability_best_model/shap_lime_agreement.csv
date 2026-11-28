@@ -1,0 +1,2 @@
+model,spearman_rho_all_features,spearman_p,top15_overlap,top15_jaccard,n_subjects
+MLP,0.8466078643422794,3.57515767414231e-24,10,0.5,51

@@ -45,6 +45,9 @@ python src/44_train_test_splits.py
 # SHAP + LIME for top-5 models + cross-model importance
 python src/45_shap_lime_top5_models.py
 
+# Dedicated SHAP + LIME for the single highest-performing model only (MLP)
+python src/47_shap_lime_best_model.py
+
 # Deep learning extensions (exploratory)
 python src/46_dl_extensions.py
 ```

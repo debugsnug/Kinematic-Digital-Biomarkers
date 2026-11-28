@@ -213,6 +213,8 @@ def main():
                  "Train-test split experiments (70:30, 80:20, 90:10) + comparison vs nested CV")
         run_step("45_shap_lime_top5_models.py",
                  "SHAP + LIME for top-5 models + cross-model feature importance")
+        run_step("47_shap_lime_best_model.py",
+                 "Dedicated SHAP + LIME for the single highest-performing model only")
         run_step("46_dl_extensions.py",
                  "Deep learning extensions: Extended MLP (exploratory) + 1D-CNN stub (future work)")
 
